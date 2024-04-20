@@ -69,7 +69,7 @@ public class Creature implements LifeForm{
         return species;
     }
 
-    //If a creature is under the age of 5, it cannot reproduce. If its above 5 years old, it has a 20 percent chance of reproducing
+    //If a creature is under the age of 5, it cannot reproduce
     public boolean reproduce()
     {
         Random random = new Random();
@@ -77,10 +77,22 @@ public class Creature implements LifeForm{
         {
             return false;
         }
-        //Twenty percent chance of reproducing
-        else if(random.nextInt(11) < 9)
+        //Twenty percent chance of reproducing if the creature is between 5 and 10
+        else if(age < 11)
         {
-            return false;
+            if(random.nextInt(11) < 9)
+            {
+                return false;
+            }
+                
+        }
+        //If the creature is above 11 years old, it has a 40% chance of reproducing
+        else if(age > 11)
+        {
+            if(random.nextInt(11) < 7)
+            {
+                return false;
+            }
         }
         return true;
 
