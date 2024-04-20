@@ -1,7 +1,9 @@
+package Life;
 public interface LifeForm
 {
     boolean die();
     boolean reproduce();
+    String[] SPECIES = {"Rabbit", "Wolf", "Bear"};
     enum deathCause
     {
         STARVED,

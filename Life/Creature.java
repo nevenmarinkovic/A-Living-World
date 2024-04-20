@@ -1,11 +1,15 @@
+package Life;
+//import Life.LifeForm.deathCause;
+//import Life.LifeForm.moodFeeling;
+
 public class Creature implements LifeForm{
     String name;
     String species;
     int age;
     deathCause cause;
     moodFeeling mood;
-    int cod; //Chance of death
-    int cor; //Chance of reproduction
+    double cod = 0.05; //Chance of death
+    double cor = .1; //Chance of reproduction
     
     public void causeOfDeath(int i)
     {
@@ -34,12 +38,10 @@ public class Creature implements LifeForm{
                    
     }
 
-    public Creature(String n, String s, int cd, int cr)
+    public Creature(String n, int s)
     {
         name = n;
-        species = s;
-        cod = cd;
-        cor = cr;
+        species = SPECIES[s];
         age = 0;
     }
 
@@ -61,6 +63,11 @@ public class Creature implements LifeForm{
     {
         mood = moodFeeling.values()[i];
         System.out.println(name + " is feeling " + mood + ".");
+    }
+
+    public void creatureInfo()
+    {
+        System.out.println(name + " is a " + species + " who is " + age + " years old.");
     }
 
 }
