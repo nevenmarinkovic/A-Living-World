@@ -1,7 +1,5 @@
 package Life;
 import java.util.*;
-//import Life.LifeForm.deathCause;
-//import Life.LifeForm.moodFeeling;
 
 public class Creature implements LifeForm{
     String name;
@@ -9,28 +7,38 @@ public class Creature implements LifeForm{
     int age;
     deathCause cause;
     moodFeeling mood;
-    double cod = 0.05; //Chance of death
-    double cor = .1; //Chance of reproduction
+
     
+    //This function prints out an animals cause of death. Not utilized in this assignment
     public void causeOfDeath(int i)
     {
-        
         cause = deathCause.values()[i];
         System.out.println(name + " was " + cause + ".");
     }
 
     public boolean die()
     {
+        Random random = new Random();
+        //Creatures under the age of 5 have a 95% chance of living
         if(age < 5)
         {
-            if(cod > 25)
+            if(random.nextInt(101) > 5)
             { 
                 return false;
             }
         }
-        else if(age < 10)
+        //Creatures between 5-10 have a 70% chance of living
+        else if(age < 11)
         {
-            if(cod > 75)
+            if(random.nextInt(101) > 30)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            //Creatures over 10 have a 20% chance of living
+            if(random.nextInt(101) > 80)
             {
                 return false;
             }
@@ -61,7 +69,7 @@ public class Creature implements LifeForm{
         return species;
     }
 
-    //If a creature is under the age of 5, it cannot reproduce. If its above 5 years old, it has a 10 percent chance of reproducing
+    //If a creature is under the age of 5, it cannot reproduce. If its above 5 years old, it has a 20 percent chance of reproducing
     public boolean reproduce()
     {
         Random random = new Random();
@@ -69,8 +77,8 @@ public class Creature implements LifeForm{
         {
             return false;
         }
-        //Ten percent chance of reproducing
-        else if(random.nextInt(11) <= 9)
+        //Twenty percent chance of reproducing
+        else if(random.nextInt(11) < 9)
         {
             return false;
         }
@@ -78,21 +86,30 @@ public class Creature implements LifeForm{
 
     }
 
+    //Function to print a creatures mood. Not utilized in this assignment, maybe in the future.
     public void mood(int i)
     {
         mood = moodFeeling.values()[i];
         System.out.println(name + " is feeling " + mood + ".");
     }
 
+    //Print out the creature's info
     public void creatureInfo()
     {
         System.out.println(name + " is a " + species + " who is " + age + " years old.");
     }
 
-    //Update the creatures age
+    //Update the creatures age (used if a creature survives a year)
     public void oneYear()
     {
         age += 1;
     }
+
+    //Elixir bumps up a creatures age by 2
+    public void elixirEnhancement()
+    {
+        age += 2;
+    }
+
 
 }

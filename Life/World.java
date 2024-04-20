@@ -87,4 +87,47 @@ public class World
         }
     }
 
+    //Elixir only gets spawned once the population reaches a certain size
+    public void spawnAgeElixir()
+    {
+        int populationSize = creatures.size();
+        if(populationSize >= 3)
+        {
+            //One bottle of elixir for every 3 creatures
+            int numberOfBottles = populationSize/3;
+            Random random = new Random();
+            for(int i = 0; i < numberOfBottles; i++)
+            {
+                creatures.get(random.nextInt(creatures.size())).elixirEnhancement();
+            }
+
+        }
+    }
+
+    //Go through our list of living creatures. Run the die method which checks their age and rolls the dice to see if they will die
+    public void reaper()
+    {
+        for(int i = 0; i < creatures.size(); i++)
+        {
+            Creature current = creatures.get(i);
+            if(current.die())
+            {
+                deadCreatures.add(current);
+                creatures.remove(current);
+            }
+        }
+
+    }
+
+    //These two functions merely return the living and dead population of creatures.
+    public int getAlivePopulation()
+    {
+        return creatures.size();
+    }
+
+    public int getDeadPopulation()
+    {
+        return deadCreatures.size();
+    }
+
 }
